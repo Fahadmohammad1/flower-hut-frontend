@@ -10,5 +10,16 @@ export default {
   },
   // eslint-disable-next-line no-undef
   plugins: [daisyui],
+
+  daisyui: {
+    theme: [
+      {
+        mytheme: {
+          "primary": "#ff00ff",
+          'fh-primary': "#FF00B8"
+        }
+      }
+    ],
+  },
 }
 
