@@ -7,6 +7,8 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import Loading from "../components/shared/Loading";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -20,7 +22,19 @@ const Login = () => {
   const [signInWithGoogle, , gLoading, gError] = useSignInWithGoogle(auth);
 
   const handleEmailLogin = async () => {
-    signInWithEmailAndPassword(email, password);
+    const res = await signInWithEmailAndPassword(email, password);
+
+    if (res?.user) {
+      const data = await axios.post(
+        "https://flower-hut-backend.vercel.app/api/v1/auth/login-user",
+        { email, password }
+      );
+      if (data?.data?.statusCode === 200) {
+        toast.success(data?.data?.message);
+      } else {
+        toast.error("Something went wrong, Please try again");
+      }
+    }
   };
 
   if (loading || gLoading) {
@@ -108,7 +122,7 @@ const Login = () => {
             type="submit"
             className="w-full bg-fh-primary text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
           >
-            Register
+            Login
           </button>
         </form>
       </div>

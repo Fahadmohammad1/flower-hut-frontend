@@ -8,6 +8,8 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import Loading from "../components/shared/Loading";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -22,7 +24,19 @@ const Register = () => {
     useCreateUserWithEmailAndPassword(auth);
 
   const handleEmailRegister = async () => {
-    createUserWithEmailAndPassword(email, password);
+    const res = await createUserWithEmailAndPassword(email, password);
+
+    if (res?.user) {
+      const data = await axios.post(
+        "https://flower-hut-backend.vercel.app/api/v1/auth/create-user",
+        { name, email, role: "user", password }
+      );
+      if (data?.data?.statusCode === 200) {
+        toast.success(data?.data?.message);
+      } else {
+        toast.error("Something went wrong, Please try again");
+      }
+    }
   };
 
   // google

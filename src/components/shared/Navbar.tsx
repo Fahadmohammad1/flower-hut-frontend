@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/Logo.png";
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/firebase.config";
@@ -6,6 +6,7 @@ import Loading from "./Loading";
 
 const Navbar = () => {
   const [user, loading] = useAuthState(auth);
+  const navigate = useNavigate();
 
   const [signOut, sLoading] = useSignOut(auth);
 
@@ -47,7 +48,12 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <img src={logo} alt="logo" />
+        <img
+          className="cursor-pointer"
+          onClick={() => navigate("/")}
+          src={logo}
+          alt="logo"
+        />
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
