@@ -1,7 +1,17 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/Logo.png";
+import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
+import { auth } from "../../firebase/firebase.config";
+import Loading from "./Loading";
 
 const Navbar = () => {
+  const [user, loading] = useAuthState(auth);
+
+  const [signOut, sLoading] = useSignOut(auth);
+
+  if (loading || sLoading) {
+    return <Loading />;
+  }
   return (
     <div className="navbar bg-transparent">
       <div className="navbar-start">
@@ -53,7 +63,21 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        {user?.email ? (
+          <button
+            onClick={async () => {
+              const success = await signOut();
+              if (success) {
+                alert("You are sign out");
+              }
+            }}
+            className="btn"
+          >
+            Logout
+          </button>
+        ) : (
+          <button className="btn">Login</button>
+        )}
       </div>
     </div>
   );

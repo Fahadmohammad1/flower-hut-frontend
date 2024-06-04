@@ -6,7 +6,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'fh-primary': "#FF00B8"
+      }
+    },
   },
   // eslint-disable-next-line no-undef
   plugins: [daisyui],
@@ -16,7 +20,6 @@ export default {
       {
         mytheme: {
           "primary": "#ff00ff",
-          'fh-primary': "#FF00B8"
         }
       }
     ],
