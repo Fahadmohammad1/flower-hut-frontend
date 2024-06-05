@@ -19,7 +19,7 @@ const Login = () => {
     useSignInWithEmailAndPassword(auth);
 
   // google
-  const [signInWithGoogle, , gLoading, gError] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, user, gLoading, gError] = useSignInWithGoogle(auth);
 
   const handleEmailLogin = async () => {
     const res = await signInWithEmailAndPassword(email, password);
@@ -45,6 +45,25 @@ const Login = () => {
     return <p>Error: {error?.message}</p>;
   }
 
+  const handleGoogle = async () => {
+    signInWithGoogle();
+
+    if (user?.user) {
+      const { email } = user.user;
+      const { data } = await axios.post(
+        "https://flower-hut-backend.vercel.app/api/v1/auth/login-user",
+        { email, password: "12345" }
+      );
+      console.log(data);
+      if (data?.statusCode === 200) {
+        toast.success(data?.message);
+        localStorage.setItem("token", data?.data?.accessToken);
+      } else {
+        toast.error("Something went wrong, Please try again");
+      }
+    }
+  };
+
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
@@ -67,7 +86,7 @@ const Login = () => {
           Welcome back
         </h2>
         <div className="flex justify-evenly">
-          <button onClick={() => signInWithGoogle()} className="btn">
+          <button onClick={handleGoogle} className="btn">
             <img src={googleLogo} className="w-10" />
             Google
           </button>
