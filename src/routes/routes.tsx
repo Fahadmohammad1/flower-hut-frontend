@@ -9,6 +9,9 @@ import AddFlower from "../pages/dashboard/AddFlower";
 import MyFlowers from "../pages/dashboard/MyFlowers";
 import PrivateRoute from "./PrivateRoute";
 import Shop from "../pages/Shop";
+import AboutUs from "../pages/AboutUs";
+import ContactUs from "../pages/ContactUs";
+import Blog from "../pages/Blog";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +33,18 @@ export const router = createBrowserRouter([
       {
         path: "shop",
         element: <Shop />,
+      },
+      {
+        path: "about-us",
+        element: <AboutUs />,
+      },
+      {
+        path: "contact-us",
+        element: <ContactUs />,
+      },
+      {
+        path: "blog",
+        element: <Blog />,
       },
     ],
   },

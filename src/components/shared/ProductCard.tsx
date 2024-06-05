@@ -9,7 +9,8 @@ const ProductCard = ({ flower }: { flower: IFlower }) => {
       </figure>
       <div className="card-body">
         <h2 className="card-title">{flower?.name.slice(0, 9)}</h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
+        <p>${flower?.price}</p>
+        <p>{flower?.category}</p>
         <div className="card-actions justify-end">
           <button className="btn btn-primary">Buy Now</button>
         </div>
