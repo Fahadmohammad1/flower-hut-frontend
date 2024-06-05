@@ -13,7 +13,7 @@ const UpdateFlowerInfo = ({ flower }: { flower: unknown }) => {
     e.preventDefault();
 
     const form = e.target;
-    const name = form?.title?.value;
+    const name = form?.name?.value;
     const price = form.price?.value;
     const description = form?.description?.value;
     const image = form?.image?.value;
