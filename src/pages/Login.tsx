@@ -1,8 +1,9 @@
 import googleLogo from "../assets/google.png";
 import facebookLogo from "../assets/facebook.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { auth } from "../firebase/firebase.config";
 import {
+  useAuthState,
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
@@ -13,13 +14,14 @@ import toast from "react-hot-toast";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, loading] = useAuthState(auth);
 
   // email and password login
-  const [signInWithEmailAndPassword, , loading, error] =
+  const [signInWithEmailAndPassword, , eLoading, error] =
     useSignInWithEmailAndPassword(auth);
 
   // google
-  const [signInWithGoogle, user, gLoading, gError] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, , gLoading, gError] = useSignInWithGoogle(auth);
 
   const handleEmailLogin = async () => {
     const res = await signInWithEmailAndPassword(email, password);
@@ -38,31 +40,31 @@ const Login = () => {
     }
   };
 
-  if (loading || gLoading) {
+  useEffect(() => {
+    (async () => {
+      if (user) {
+        const { email } = user;
+        const { data } = await axios.post(
+          "https://flower-hut-backend.vercel.app/api/v1/auth/login-user",
+          { email, password: "12345" }
+        );
+        console.log(data);
+        if (data?.statusCode === 200) {
+          toast.success(data?.message);
+          localStorage.setItem("token", data?.data?.accessToken);
+        } else {
+          toast.error("Something went wrong, Please try again");
+        }
+      }
+    })();
+  }, [user]);
+
+  if (loading || gLoading || eLoading) {
     return <Loading />;
   }
   if (error || gError) {
     return <p>Error: {error?.message}</p>;
   }
-
-  const handleGoogle = async () => {
-    signInWithGoogle();
-
-    if (user?.user) {
-      const { email } = user.user;
-      const { data } = await axios.post(
-        "https://flower-hut-backend.vercel.app/api/v1/auth/login-user",
-        { email, password: "12345" }
-      );
-      console.log(data);
-      if (data?.statusCode === 200) {
-        toast.success(data?.message);
-        localStorage.setItem("token", data?.data?.accessToken);
-      } else {
-        toast.error("Something went wrong, Please try again");
-      }
-    }
-  };
 
   return (
     <div className="flex items-center justify-center h-screen">
@@ -86,7 +88,7 @@ const Login = () => {
           Welcome back
         </h2>
         <div className="flex justify-evenly">
-          <button onClick={handleGoogle} className="btn">
+          <button onClick={() => signInWithGoogle()} className="btn">
             <img src={googleLogo} className="w-10" />
             Google
           </button>

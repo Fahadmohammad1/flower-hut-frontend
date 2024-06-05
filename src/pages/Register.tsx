@@ -1,8 +1,9 @@
 import googleLogo from "../assets/google.png";
 import facebookLogo from "../assets/facebook.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { auth } from "../firebase/firebase.config";
 import {
+  useAuthState,
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
@@ -14,9 +15,10 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, loading] = useAuthState(auth);
 
   // email and password
-  const [createUserWithEmailAndPassword, , loading, error] =
+  const [createUserWithEmailAndPassword, , eLoading, eError] =
     useCreateUserWithEmailAndPassword(auth);
 
   const handleEmailRegister = async () => {
@@ -37,32 +39,33 @@ const Register = () => {
   };
 
   // google
-  const [signInWithGoogle, user, gLoading, gError] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, , gLoading, gError] = useSignInWithGoogle(auth);
 
-  if (loading || gLoading) {
+  useEffect(() => {
+    (async () => {
+      if (user?.email) {
+        const { displayName, photoURL, email } = user;
+        const { data } = await axios.post(
+          "https://flower-hut-backend.vercel.app/api/v1/auth/create-user",
+          { name: displayName, email, role: "user", avatar: photoURL }
+        );
+
+        if (data?.statusCode === 200) {
+          toast.success(data?.message);
+          localStorage.setItem("token", data?.data?.accessToken);
+        } else {
+          toast.error("Something went wrong, Please try again");
+        }
+      }
+    })();
+  }, [user]);
+
+  if (eLoading || gLoading || loading) {
     return <Loading />;
   }
-  if (error || gError) {
-    return <p>Error: {error?.message}</p>;
+  if (eError || gError) {
+    return <p>Error: {eError?.message || gError?.message}</p>;
   }
-
-  const handleGoogle = async () => {
-    signInWithGoogle();
-
-    if (user) {
-      const { displayName, photoURL, email } = user.user;
-      const { data } = await axios.post(
-        "https://flower-hut-backend.vercel.app/api/v1/auth/create-user",
-        { name: displayName, email, role: "user", avatar: photoURL }
-      );
-      if (data?.statusCode === 200) {
-        toast.success(data?.data?.message);
-        localStorage.setItem("token", data?.data?.data?.accessToken);
-      } else {
-        toast.error("Something went wrong, Please try again");
-      }
-    }
-  };
 
   return (
     <div className="flex items-center justify-center h-screen">
@@ -86,7 +89,7 @@ const Register = () => {
           Create a new account
         </h2>
         <div className="flex justify-evenly">
-          <button onClick={handleGoogle} className="btn">
+          <button onClick={() => signInWithGoogle()} className="btn">
             <img src={googleLogo} className="w-10" />
             Google
           </button>
