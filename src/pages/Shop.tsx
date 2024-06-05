@@ -1,31 +1,61 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import ProductCard from "../components/shared/ProductCard";
 import { IFlower } from "../interface/common";
 
 const Shop = () => {
   const [flowers, setFlowers] = useState<IFlower[] | null>([]);
   const [search, setSearch] = useState<string | null>(null);
+  const [category, setCategory] = useState<string | null>(null);
+  const [minPrice, setMinPrice] = useState<number | null>(null);
+  const [maxPrice, setMaxPrice] = useState<number | null>(null);
+
+  const handleCategorySelect = (event: ChangeEvent<HTMLSelectElement>) => {
+    setCategory(event.target.value === "All" ? null : event.target.value);
+  };
+
+  const handleMinPriceChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setMinPrice(event.target.value ? parseFloat(event.target.value) : null);
+  };
+
+  const handleMaxPriceChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setMaxPrice(event.target.value ? parseFloat(event.target.value) : null);
+  };
 
   useEffect(() => {
+    const baseURL = "https://flower-hut-backend.vercel.app/api/v1/product/all";
+
+    const params = new URLSearchParams();
+    if (search) {
+      params.append("search", search);
+    }
+    if (category) {
+      params.append("category", category);
+    }
+    if (minPrice !== null) {
+      params.append("minPrice", minPrice.toString());
+    }
+    if (maxPrice !== null) {
+      params.append("maxPrice", maxPrice.toString());
+    }
+
+    const url = `${baseURL}?${params.toString()}`;
+
     (async () => {
-      const { data } = await axios.get(
-        search
-          ? `https://flower-hut-backend.vercel.app/api/v1/product/all?search=${search}`
-          : "https://flower-hut-backend.vercel.app/api/v1/product/all"
-      );
+      const { data } = await axios.get(url);
       setFlowers(data?.data);
     })();
-  }, [search]);
+  }, [search, category, minPrice, maxPrice]);
+
   return (
     <section className="container mx-auto">
-      <div className="flex justify-center">
+      <div className="flex justify-center gap-10">
         <label className="input input-bordered flex items-center gap-2">
           <input
             type="text"
             onChange={(e) => setSearch(e.target.value)}
             className="grow"
-            placeholder="Search"
+            placeholder="Search By Name"
           />
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -40,6 +70,34 @@ const Shop = () => {
             />
           </svg>
         </label>
+        <select
+          onChange={handleCategorySelect}
+          className="select select-bordered w-full max-w-xs"
+        >
+          <option>All</option>
+          <option>Small</option>
+          <option>Standard</option>
+          <option>Medium</option>
+          <option>Large</option>
+          <option>Lavish</option>
+          <option>Opulent</option>
+          <option>Extravagant</option>
+        </select>
+        <input
+          type="number"
+          placeholder="Min price"
+          value={minPrice ?? ""}
+          onChange={handleMinPriceChange}
+          className="input input-bordered w-full max-w-xs"
+        />
+
+        <input
+          type="number"
+          placeholder="Max price"
+          value={maxPrice ?? ""}
+          onChange={handleMaxPriceChange}
+          className="input input-bordered w-full max-w-xs"
+        />
       </div>
       <div className="lg:grid grid-cols-3 mt-10">
         {flowers?.map((flower) => (
