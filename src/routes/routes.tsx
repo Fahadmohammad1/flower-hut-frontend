@@ -8,6 +8,7 @@ import Profile from "../pages/dashboard/Profile";
 import AddFlower from "../pages/dashboard/AddFlower";
 import MyFlowers from "../pages/dashboard/MyFlowers";
 import PrivateRoute from "./PrivateRoute";
+import Shop from "../pages/Shop";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "shop",
+        element: <Shop />,
       },
     ],
   },
