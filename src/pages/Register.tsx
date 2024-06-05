@@ -3,7 +3,6 @@ import facebookLogo from "../assets/facebook.png";
 import { useState } from "react";
 import { auth } from "../firebase/firebase.config";
 import {
-  useAuthState,
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";

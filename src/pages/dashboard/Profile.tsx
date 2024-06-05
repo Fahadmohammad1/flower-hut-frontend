@@ -1,9 +1,10 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { IProfile } from "../../interface/common";
 
 const Profile = () => {
-  const [profile, setProfile] = useState([] || {});
+  const [profile, setProfile] = useState<IProfile | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -19,13 +20,14 @@ const Profile = () => {
     })();
   }, []);
 
-  const handleUpdateProfile = async (e) => {
+  const handleUpdateProfile = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const form = e.target;
-    const image = form?.image?.value;
-    const name = form?.name?.value;
-    const password = form?.password?.value;
+    const form = e.currentTarget;
+    const image = (form.elements.namedItem("image") as HTMLInputElement).value;
+    const name = (form.elements.namedItem("name") as HTMLInputElement).value;
+    const password = (form.elements.namedItem("password") as HTMLInputElement)
+      .value;
 
     const productData = {
       avatar: image,
@@ -137,7 +139,7 @@ const Profile = () => {
                       name="name"
                       id="name"
                       className="grow"
-                      defaultValue={profile.name}
+                      defaultValue={profile?.name}
                     />
                   </label>
                   <label className="input input-bordered flex items-center gap-2">

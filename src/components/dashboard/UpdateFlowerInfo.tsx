@@ -1,22 +1,25 @@
 import axios from "axios";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import Swal from "sweetalert2";
+import { IFlower } from "../../interface/common";
 
-const UpdateFlowerInfo = ({ flower }: { flower: unknown }) => {
+const UpdateFlowerInfo = ({ flower }: { flower: IFlower | null }) => {
   const [category, setCategory] = useState("");
 
   const handleCategorySelect = (event: ChangeEvent<HTMLSelectElement>) => {
     setCategory(event.target.value);
   };
 
-  const handleUpdateProduct = async (e) => {
+  const handleUpdateProduct = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const form = e.target;
-    const name = form?.name?.value;
-    const price = form.price?.value;
-    const description = form?.description?.value;
-    const image = form?.image?.value;
+    const form = e.target as HTMLFormElement;
+    const name = (form.elements.namedItem("name") as HTMLInputElement).value;
+    const price = (form.elements.namedItem("price") as HTMLInputElement).value;
+    const description = (
+      form.elements.namedItem("description") as HTMLInputElement
+    ).value;
+    const image = (form.elements.namedItem("image") as HTMLInputElement).value;
 
     const productData = {
       name,
@@ -27,7 +30,7 @@ const UpdateFlowerInfo = ({ flower }: { flower: unknown }) => {
     };
 
     const { data } = await axios.patch(
-      `https://flower-hut-backend.vercel.app/api/v1/product/${flower.id}`,
+      `https://flower-hut-backend.vercel.app/api/v1/product/${flower?.id}`,
       productData,
       {
         headers: {
@@ -38,7 +41,8 @@ const UpdateFlowerInfo = ({ flower }: { flower: unknown }) => {
     console.log(data);
 
     if (data?.statusCode === 200) {
-      document.getElementById("my_modal_3").close();
+      const modal = document.getElementById("my_modal_3") as HTMLDialogElement;
+      if (modal) modal.close();
 
       Swal.fire({
         title: "Updated!",

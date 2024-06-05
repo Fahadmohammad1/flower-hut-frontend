@@ -2,10 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import UpdateFlowerInfo from "../../components/dashboard/UpdateFlowerInfo";
+import { IFlower } from "../../interface/common";
 
 const MyFlowers = () => {
   const [flowers, setFlowers] = useState([]);
-  const [selectedFlower, setSelectedFlower] = useState(null);
+  const [selectedFlower, setSelectedFlower] = useState<IFlower | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -21,13 +22,14 @@ const MyFlowers = () => {
     })();
   }, []);
 
-  const handleUpdate = (id) => {
-    setSelectedFlower(id);
-    document.getElementById("my_modal_3").showModal();
+  const handleUpdate = (flower: IFlower) => {
+    setSelectedFlower(flower);
+    const modal = document.getElementById("my_modal_3") as HTMLDialogElement;
+    if (modal) modal.showModal();
   };
 
   // delete
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: string) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -77,7 +79,7 @@ const MyFlowers = () => {
           </tr>
         </thead>
         <tbody>
-          {flowers?.map((flower) => (
+          {flowers?.map((flower: IFlower) => (
             <tr key={flower?.id}>
               <td>
                 <div className="flex items-center gap-3">
