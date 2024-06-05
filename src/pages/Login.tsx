@@ -31,6 +31,7 @@ const Login = () => {
       );
       if (data?.data?.statusCode === 200) {
         toast.success(data?.data?.message);
+        localStorage.setItem("token", data?.data?.data?.accessToken);
       } else {
         toast.error("Something went wrong, Please try again");
       }

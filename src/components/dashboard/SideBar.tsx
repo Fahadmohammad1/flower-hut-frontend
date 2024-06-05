@@ -55,10 +55,13 @@ const SideBar = () => {
             <Link to="">Profile</Link>
           </li>
           <li className="font-bold">
-            <Link to="all-products">All Flowers</Link>
+            <Link to="all-flowers">All Flowers</Link>
           </li>
           <li className="font-bold">
-            <Link to="add-product">Add New Flower</Link>
+            <Link to="my-flowers">My Flowers</Link>
+          </li>
+          <li className="font-bold">
+            <Link to="add-flower">Add New Flower</Link>
           </li>
           <li className="font-bold">
             <Link to="/">Back to Home</Link>

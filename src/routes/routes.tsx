@@ -5,6 +5,8 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import DashboardLayout from "../layout/DashboardLayout";
 import Profile from "../pages/dashboard/Profile";
+import AddFlower from "../pages/dashboard/AddFlower";
+import MyFlowers from "../pages/dashboard/MyFlowers";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +34,18 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Profile />,
+      },
+      {
+        index: true,
+        element: <Profile />,
+      },
+      {
+        path: "add-flower",
+        element: <AddFlower />,
+      },
+      {
+        path: "my-flowers",
+        element: <MyFlowers />,
       },
     ],
   },

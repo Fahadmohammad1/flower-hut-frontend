@@ -13,11 +13,8 @@ import toast from "react-hot-toast";
 
 const Register = () => {
   const [name, setName] = useState("");
-  console.log(name);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user] = useAuthState(auth);
-  console.log(user);
 
   // email and password
   const [createUserWithEmailAndPassword, , loading, error] =
@@ -33,6 +30,7 @@ const Register = () => {
       );
       if (data?.data?.statusCode === 200) {
         toast.success(data?.data?.message);
+        localStorage.setItem("token", data?.data?.data?.accessToken);
       } else {
         toast.error("Something went wrong, Please try again");
       }
@@ -40,7 +38,7 @@ const Register = () => {
   };
 
   // google
-  const [signInWithGoogle, , gLoading, gError] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, user, gLoading, gError] = useSignInWithGoogle(auth);
 
   if (loading || gLoading) {
     return <Loading />;

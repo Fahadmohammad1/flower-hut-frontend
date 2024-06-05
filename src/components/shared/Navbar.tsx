@@ -44,7 +44,7 @@ const Navbar = () => {
               <Link to="register">register</Link>
             </li>
             <li>
-              <a>Item 3</a>
+              <Link to="dashboard">Dashboard</Link>
             </li>
           </ul>
         </div>
@@ -64,7 +64,7 @@ const Navbar = () => {
             <Link to="register">register</Link>
           </li>
           <li>
-            <a>Item 3</a>
+            <Link to="dashboard">Dashboard</Link>
           </li>
         </ul>
       </div>
@@ -74,6 +74,7 @@ const Navbar = () => {
             onClick={async () => {
               const success = await signOut();
               if (success) {
+                localStorage.removeItem("token");
                 alert("You are sign out");
               }
             }}
