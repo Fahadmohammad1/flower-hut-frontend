@@ -7,6 +7,7 @@ import DashboardLayout from "../layout/DashboardLayout";
 import Profile from "../pages/dashboard/Profile";
 import AddFlower from "../pages/dashboard/AddFlower";
 import MyFlowers from "../pages/dashboard/MyFlowers";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -29,7 +30,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,
