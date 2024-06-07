@@ -14,7 +14,7 @@ const Navbar = () => {
     return <Loading />;
   }
   return (
-    <div className="navbar bg-transparent">
+    <div className="navbar bg-transparent container mx-auto">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
