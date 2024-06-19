@@ -8,7 +8,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        'fh-primary': "#FF00B8"
+        'fh-primary': "#FF00B8",
+        'fh-secondary': "#120727"
       }
     },
   },
