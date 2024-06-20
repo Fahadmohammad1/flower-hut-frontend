@@ -1,5 +1,7 @@
 import floralBg from "../../assets/floral-bg.png";
 import floralBg2 from "../../assets/floral-bg2.png";
+import floralBg3 from "../../assets/floral-bg3.png";
+import floralBg4 from "../../assets/floral-bg4.png";
 
 const FloralSelection = () => {
   const data = [
@@ -23,31 +25,40 @@ const FloralSelection = () => {
     },
   ];
   return (
-    <section className="container mx-auto lg:mt-[120px]">
-      <h2 className="text-6xl font-bold text-white text-center mb-[60px]">
-        Our Floral Selection
-      </h2>
-      <div className="lg:grid grid-cols-3 gap-x-8">
-        {data.map((obj) => (
-          <div
-            style={{
-              backgroundImage: `url(${floralBg}), url(${floralBg2})`,
-              backgroundPosition: "top right, bottom left",
-              backgroundRepeat: "no-repeat, no-repeat",
-            }}
-            key={obj.id}
-            className="bg-white rounded-b-[60px]"
-          >
-            <div className="px-[48px]">
-              <h2 className="text-center text-[#120727] text-3xl font-bold mt-[60px] mb-9">
-                {obj.title}
-              </h2>
-              <p className="text-black text-justify mb-[77px]">
-                {obj.description}
-              </p>
+    <section
+      className="h-screen"
+      style={{
+        backgroundImage: `url(${floralBg3}), url(${floralBg4})`,
+        backgroundPosition: "left,right",
+        backgroundRepeat: "no-repeat, no-repeat",
+      }}
+    >
+      <div className="container mx-auto lg:mt-[120px]">
+        <h2 className="text-6xl font-bold text-white text-center mb-[60px]">
+          Our Floral Selection
+        </h2>
+        <div className="lg:grid grid-cols-3 gap-x-8">
+          {data.map((obj) => (
+            <div
+              style={{
+                backgroundImage: `url(${floralBg}), url(${floralBg2})`,
+                backgroundPosition: "top right, bottom left",
+                backgroundRepeat: "no-repeat, no-repeat",
+              }}
+              key={obj.id}
+              className="bg-white rounded-b-[60px]"
+            >
+              <div className="px-[48px]">
+                <h2 className="text-center text-[#120727] text-3xl font-bold mt-[60px] mb-9">
+                  {obj.title}
+                </h2>
+                <p className="text-black text-justify mb-[77px]">
+                  {obj.description}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

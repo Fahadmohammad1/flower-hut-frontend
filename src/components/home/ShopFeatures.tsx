@@ -16,7 +16,7 @@ const ShopFeatures = () => {
     })();
   }, []);
   return (
-    <section className="container mx-auto lg:mt-[120px]">
+    <section className="container mx-auto">
       <h2 className="text-6xl font-bold text-white text-center mb-[60px]">
         Shop features
       </h2>

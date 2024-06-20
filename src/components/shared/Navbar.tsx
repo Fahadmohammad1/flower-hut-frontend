@@ -61,7 +61,7 @@ const Navbar = () => {
           alt="logo"
         />
       </div>
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal px-1 text-white">
           <li>
             <Link to="/">Home</Link>
@@ -78,25 +78,24 @@ const Navbar = () => {
           <li>
             <Link to="contact-us">Contact us</Link>
           </li>
+          {user?.email ? (
+            <li
+              onClick={async () => {
+                const success = await signOut();
+                if (success) {
+                  alert("You are sign out");
+                  localStorage.removeItem("token");
+                }
+              }}
+            >
+              <a href="#">Logout</a>
+            </li>
+          ) : (
+            <li>
+              <Link to="contact-us">Login</Link>
+            </li>
+          )}
         </ul>
-      </div>
-      <div className="navbar-end">
-        {user?.email ? (
-          <button
-            onClick={async () => {
-              const success = await signOut();
-              if (success) {
-                alert("You are sign out");
-                localStorage.removeItem("token");
-              }
-            }}
-            className="btn"
-          >
-            Logout
-          </button>
-        ) : (
-          <button className="btn">Login</button>
-        )}
       </div>
     </div>
   );
