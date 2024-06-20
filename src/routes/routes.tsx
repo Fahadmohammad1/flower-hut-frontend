@@ -12,6 +12,7 @@ import Shop from "../pages/Shop";
 import AboutUs from "../pages/AboutUs";
 import ContactUs from "../pages/ContactUs";
 import Blog from "../pages/Blog";
+import FlowerDetails from "../pages/FlowerDetails";
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
       {
         path: "blog",
         element: <Blog />,
+      },
+      {
+        path: "flower/:id",
+        element: <FlowerDetails />,
       },
     ],
   },

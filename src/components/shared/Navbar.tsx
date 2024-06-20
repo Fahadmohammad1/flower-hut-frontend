@@ -44,6 +44,9 @@ const Navbar = () => {
               <Link to="shop">Shop</Link>
             </li>
             <li>
+              <Link to="dashboard">Dashboard</Link>
+            </li>
+            <li>
               <Link to="blog">Blog</Link>
             </li>
             <li>
@@ -52,6 +55,23 @@ const Navbar = () => {
             <li>
               <Link to="contact-us">Contact us</Link>
             </li>
+            {user?.email ? (
+              <li
+                onClick={async () => {
+                  const success = await signOut();
+                  if (success) {
+                    alert("You are sign out");
+                    localStorage.removeItem("token");
+                  }
+                }}
+              >
+                <a href="#">Logout</a>
+              </li>
+            ) : (
+              <li>
+                <Link to="login">Login</Link>
+              </li>
+            )}
           </ul>
         </div>
         <img
@@ -68,6 +88,9 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="shop">Shop</Link>
+          </li>
+          <li>
+            <Link to="dashboard">Dashboard</Link>
           </li>
           <li>
             <Link to="blog">Blog</Link>
@@ -92,7 +115,7 @@ const Navbar = () => {
             </li>
           ) : (
             <li>
-              <Link to="contact-us">Login</Link>
+              <Link to="login">Login</Link>
             </li>
           )}
         </ul>

@@ -1,9 +1,14 @@
 import { IFlower } from "../../interface/common";
 import flower1 from "../../assets/flower1.png";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ flower }: { flower: IFlower }) => {
+  const navigate = useNavigate();
   return (
-    <div className="card card-compact w-full bg-white rounded-[11px]">
+    <div
+      onClick={() => navigate(`flower/${flower.id}`)}
+      className="card card-compact w-full bg-white rounded-[11px] cursor-pointer"
+    >
       <figure>
         <img className="w-full rounded-none" src={flower1} alt="flower" />
       </figure>
