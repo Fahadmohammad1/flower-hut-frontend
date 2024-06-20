@@ -1,3 +1,6 @@
+import floralBg from "../../assets/floral-bg.png";
+import floralBg2 from "../../assets/floral-bg2.png";
+
 const FloralSelection = () => {
   const data = [
     {
@@ -26,7 +29,15 @@ const FloralSelection = () => {
       </h2>
       <div className="lg:grid grid-cols-3 gap-x-8">
         {data.map((obj) => (
-          <div key={obj.id} className="bg-white rounded-b-[60px]">
+          <div
+            style={{
+              backgroundImage: `url(${floralBg}), url(${floralBg2})`,
+              backgroundPosition: "top right, bottom left",
+              backgroundRepeat: "no-repeat, no-repeat",
+            }}
+            key={obj.id}
+            className="bg-white rounded-b-[60px]"
+          >
             <div className="px-[48px]">
               <h2 className="text-center text-[#120727] text-3xl font-bold mt-[60px] mb-9">
                 {obj.title}
