@@ -2,6 +2,7 @@ import axios from "axios";
 import { ChangeEvent, useEffect, useState } from "react";
 import ProductCard from "../components/shared/ProductCard";
 import { IFlower } from "../interface/common";
+import DynamicBanner from "../components/shared/DynamicBanner";
 
 const Shop = () => {
   const [flowers, setFlowers] = useState<IFlower[] | null>([]);
@@ -47,8 +48,15 @@ const Shop = () => {
     })();
   }, [search, category, minPrice, maxPrice]);
 
+  const bannerInfo = {
+    title: "All Flowers",
+    description:
+      "Shop for the freshest flowers and bouquets online at Flower Hut. We have a huge range of flowers to choose from online but if you prefer why not pop into our shop based at Surry Hills and we'll customise a bouquet of flowers for that special occasion. From unique flowers crafted with love each day by our florist team to a huge selection of market-fresh flowers that we collect every morning, we’re your expert local florists in Haymarket and Surry Hills area. And, the best part is, you will get same-day delivery when you shop online - this is our guarantee to you - fast, fresh flowers delivered directly to your home or office.",
+  };
+
   return (
     <section className="container mx-auto">
+      <DynamicBanner bannerInfo={bannerInfo} />
       <div className="flex justify-center gap-10">
         <label className="input input-bordered flex items-center gap-2">
           <input
@@ -99,7 +107,7 @@ const Shop = () => {
           className="input input-bordered w-full max-w-xs"
         />
       </div>
-      <div className="lg:grid grid-cols-3 mt-10">
+      <div className="lg:grid grid-cols-3 mt-10 gap-[10px]">
         {flowers?.map((flower) => (
           <ProductCard key={flower.id} flower={flower} />
         ))}
