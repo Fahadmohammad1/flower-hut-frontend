@@ -55,9 +55,9 @@ const Shop = () => {
   };
 
   return (
-    <section className="container mx-auto">
+    <section className="container mx-auto px-5 lg:px-0">
       <DynamicBanner bannerInfo={bannerInfo} />
-      <div className="flex justify-center gap-10">
+      <div className="flex flex-col lg:flex-row justify-center gap-10">
         <label className="input input-bordered flex items-center gap-2">
           <input
             type="text"
@@ -80,7 +80,7 @@ const Shop = () => {
         </label>
         <select
           onChange={handleCategorySelect}
-          className="select select-bordered w-full max-w-xs"
+          className="select select-bordered w-full"
         >
           <option>All</option>
           <option>Small</option>
@@ -96,7 +96,7 @@ const Shop = () => {
           placeholder="Min price"
           value={minPrice ?? ""}
           onChange={handleMinPriceChange}
-          className="input input-bordered w-full max-w-xs"
+          className="input input-bordered w-full"
         />
 
         <input
@@ -104,7 +104,7 @@ const Shop = () => {
           placeholder="Max price"
           value={maxPrice ?? ""}
           onChange={handleMaxPriceChange}
-          className="input input-bordered w-full max-w-xs"
+          className="input input-bordered w-full"
         />
       </div>
       <div className="lg:grid grid-cols-3 mt-10 gap-[10px]">
