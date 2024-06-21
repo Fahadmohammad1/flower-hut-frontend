@@ -28,15 +28,15 @@ const FeaturedBlogs = () => {
     },
   ];
   return (
-    <section className="container mx-auto lg:mt-[120px]">
-      <h2 className="text-6xl font-bold text-white text-center mb-[60px]">
+    <section className="container mx-auto lg:mt-[120px] px-5 lg:px-0">
+      <h2 className="lg:text-6xl text-4xl font-bold text-white text-center mb-[60px]">
         Our Latest Blog
       </h2>
       <div className="lg:grid grid-cols-3 gap-x-5">
         {blogData.map((blog) => (
           <div
             key={blog.id}
-            className="card card-compact w-full bg-white rounded-[10px]"
+            className="card card-compact w-full bg-white rounded-[10px] mb-10 lg:mb-0"
           >
             <figure>
               <img

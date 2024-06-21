@@ -12,13 +12,14 @@ const UniqueServices = () => {
         backgroundPosition: "top left, bottom right",
         backgroundRepeat: "no-repeat, no-repeat",
       }}
+      className="px-5 lg:px-0"
     >
       <div className="container mx-auto lg:mt-[120px]">
-        <h2 className="text-6xl font-bold text-white text-center mb-[60px]">
+        <h2 className="lg:text-6xl text-4xl mt-10 lg:mt-0 font-bold text-white text-center mb-[60px]">
           What Makes Us Unique
         </h2>
         <div className="mb-[50px]">
-          <div className="flex gap-x-[50px]">
+          <div className="lg:flex gap-x-[50px]">
             <div className="w-full">
               <img
                 src={vase}
@@ -26,7 +27,7 @@ const UniqueServices = () => {
                 alt=""
               />
             </div>
-            <div className="flex flex-col justify-center w-full">
+            <div className="flex flex-col justify-center w-full mt-10 lg:mt-0">
               <h4 className="font-bold text-5xl text-fh-primary mb-5">
                 Customization
               </h4>
@@ -39,7 +40,7 @@ const UniqueServices = () => {
           </div>
         </div>
         <div className="mb-[50px]">
-          <div className="flex gap-x-[50px] flex-row-reverse">
+          <div className="lg:flex gap-x-[50px] flex-row-reverse">
             <div className="w-full">
               <img
                 src={delivery}
@@ -47,7 +48,7 @@ const UniqueServices = () => {
                 alt=""
               />
             </div>
-            <div className="flex flex-col justify-center items-end w-full">
+            <div className="flex flex-col justify-center items-end w-full mt-10 lg:mt-0">
               <h4 className="font-bold text-5xl text-fh-primary mb-5">
                 Same-Day Delivery
               </h4>
@@ -59,7 +60,7 @@ const UniqueServices = () => {
           </div>
         </div>
         <div className="mb-[50px]">
-          <div className="flex gap-x-[50px]">
+          <div className="lg:flex gap-x-[50px]">
             <div className="w-full">
               <img
                 src={customer}
@@ -67,7 +68,7 @@ const UniqueServices = () => {
                 alt=""
               />
             </div>
-            <div className="flex flex-col justify-center">
+            <div className="flex flex-col justify-center mt-10 lg:mt-0">
               <h4 className="font-bold text-5xl text-fh-primary mb-5">
                 Customer Satisfaction
               </h4>

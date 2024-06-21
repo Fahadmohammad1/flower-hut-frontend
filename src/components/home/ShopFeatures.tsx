@@ -16,9 +16,9 @@ const ShopFeatures = () => {
     })();
   }, []);
   return (
-    <section className="container mx-auto">
-      <h2 className="text-6xl font-bold text-white text-center mb-[60px]">
-        Shop features
+    <section className="container mx-auto px-5 lg:px-0">
+      <h2 className="text-4xl lg:text-6xl font-bold text-white text-center mb-[60px] mt-10 lg:mt-0">
+        Featured Flowers
       </h2>
       <div className="lg:grid grid-cols-3 mt-10 gap-[10px]">
         {flowers?.map((flower) => (
@@ -26,7 +26,7 @@ const ShopFeatures = () => {
         ))}
       </div>
       <div className="flex justify-center">
-        <button className="btn bg-fh-primary rounded-full text-white lg:w-[180px] py-4 mt-[50px]">
+        <button className="btn bg-fh-primary rounded-full text-white lg:w-[180px] w-full py-4 mt-[50px]">
           Shop Now
         </button>
       </div>

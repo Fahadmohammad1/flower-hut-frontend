@@ -7,7 +7,7 @@ const ProductCard = ({ flower }: { flower: IFlower }) => {
   return (
     <div
       onClick={() => navigate(`flower/${flower.id}`)}
-      className="card card-compact w-full bg-white rounded-[11px] cursor-pointer"
+      className="card card-compact w-full bg-white rounded-[11px] cursor-pointer mb-10 lg:mb-0"
     >
       <figure>
         <img className="w-full rounded-none" src={flower1} alt="flower" />

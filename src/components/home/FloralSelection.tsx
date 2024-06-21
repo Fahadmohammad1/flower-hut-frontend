@@ -26,7 +26,7 @@ const FloralSelection = () => {
   ];
   return (
     <section
-      className="h-screen"
+      className="lg:h-screen px-5 lg:px-0"
       style={{
         backgroundImage: `url(${floralBg3}), url(${floralBg4})`,
         backgroundPosition: "left,right",
@@ -34,10 +34,10 @@ const FloralSelection = () => {
       }}
     >
       <div className="container mx-auto lg:mt-[120px]">
-        <h2 className="text-6xl font-bold text-white text-center mb-[60px]">
+        <h2 className="text-4xl lg:text-6xl font-bold text-white text-center mb-[60px] mt-10 lg:mt-0">
           Our Floral Selection
         </h2>
-        <div className="lg:grid grid-cols-3 gap-x-8">
+        <div className="lg:grid grid-cols-3 gap-8">
           {data.map((obj) => (
             <div
               style={{
@@ -46,9 +46,9 @@ const FloralSelection = () => {
                 backgroundRepeat: "no-repeat, no-repeat",
               }}
               key={obj.id}
-              className="bg-white rounded-b-[60px]"
+              className="bg-white rounded-b-[60px] mb-10 lg:mb-0"
             >
-              <div className="px-[48px]">
+              <div className="px-[48px] py-5 lg:py-0">
                 <h2 className="text-center text-[#120727] text-3xl font-bold mt-[60px] mb-9">
                   {obj.title}
                 </h2>
